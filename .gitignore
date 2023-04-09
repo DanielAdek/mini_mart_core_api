@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+
+netstat -o -n -a |findstr "8080

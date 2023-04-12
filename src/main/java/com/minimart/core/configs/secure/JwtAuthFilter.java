@@ -22,6 +22,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     }
 
     jwt = authHeader.split(" ")[1];
+    System.out.println(jwt);
   }
   
 }

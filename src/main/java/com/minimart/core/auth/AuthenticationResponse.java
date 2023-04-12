@@ -13,5 +13,5 @@ public class AuthenticationResponse<T> {
   private Boolean status;
   private Integer statusCode;
   private String message;
-  private T Data;
+  private T data;
 }

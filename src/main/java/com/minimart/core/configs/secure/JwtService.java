@@ -1,6 +1,7 @@
 package com.minimart.core.configs.secure;
 
 import java.security.Key;
+import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,15 @@ public class JwtService {
 
   @Value("${application.security.jwt_secret.key}")
   private String SECRET_KEY;
+  
+  public String extractUsername(String token) {
+    return extractClaim(token, Claims::getSubject);
+  }
+  
+  public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+    final Claims claims = extractAllClaims(token);
+    return claimsResolver.apply(claims);
+  }
   
   private Claims extractAllClaims(String token) {
     return Jwts

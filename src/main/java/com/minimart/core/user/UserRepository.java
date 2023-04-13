@@ -12,4 +12,13 @@ public interface UserRepository extends JpaRepository<User, UUID> {
   
   @Query(value = "SELECT * FROM customers", nativeQuery = true)
   Optional<List<User>>findByQueryCustomers();
+
+  @Query(value = "DELETE FROM customers WHERE customerid = ?1", nativeQuery = true)
+  Optional<?>deleteByQueryCustomer(UUID cusomerId);
+
+  @Query(value="SELECT * FROM customers WHERE customerid = :customerId", nativeQuery = true)
+  Optional<User>findByQueryCustomer(UUID customerId);
+
+  @Query(value="INSERT INTO customers (username, phone, email, passcode, role) VALUES (?1, ?2, ?3, ?4, ?5)", nativeQuery = true)
+  Optional<User>createCustomerByQuery(User user);
 }

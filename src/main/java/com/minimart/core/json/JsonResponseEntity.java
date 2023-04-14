@@ -1,8 +1,6 @@
-package com.minimart.core.auth;
+package com.minimart.core.json;
 
 import org.springframework.http.HttpStatus;
-
-import com.minimart.core.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,10 +11,9 @@ import lombok.Data;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthenticationResponse<T> {
+public class JsonResponseEntity<T> {
   private Boolean status;
   private HttpStatus statusCode;
   private String message;
-  private User data;
-  private String token;
+  private T data;
 }

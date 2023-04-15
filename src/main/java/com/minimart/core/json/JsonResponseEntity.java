@@ -13,7 +13,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class JsonResponseEntity<T> {
   private Boolean status;
+  private Boolean error;
   private HttpStatus statusCode;
   private String message;
   private T data;
+  private String token;
 }

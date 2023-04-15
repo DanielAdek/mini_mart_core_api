@@ -27,8 +27,8 @@ public class UserProfileService {
         .message("Successful").data(users).build();
 
     } catch (Exception e) {
-      return JsonResponseEntity.builder().status(false).statusCode(HttpStatus.INTERNAL_SERVER_ERROR)
-          .message("Error: " + e.getMessage()).data(null).build();
+      return JsonResponseEntity.builder().error(true).statusCode(HttpStatus.INTERNAL_SERVER_ERROR)
+          .message("Error: " + e.getMessage()).build();
     }
   }
 
@@ -48,8 +48,8 @@ public class UserProfileService {
           .message("Successful!").data(customer).build();
 
     } catch (Exception e) {
-      return JsonResponseEntity.builder().status(false).statusCode(HttpStatus.INTERNAL_SERVER_ERROR)
-          .message("Error: " + e.getMessage()).data(null).build();
+      return JsonResponseEntity.builder().error(false).statusCode(HttpStatus.INTERNAL_SERVER_ERROR)
+          .message("Error: " + e.getMessage()).build();
     } 
   }
 
@@ -71,8 +71,8 @@ public class UserProfileService {
           .message("User with " + customerId + " deleted successfully").data(null).build();
 
     } catch (Exception e) {
-      return JsonResponseEntity.builder().status(false).statusCode(HttpStatus.INTERNAL_SERVER_ERROR)
-          .message("Error: " + e.getMessage()).data(e).build();
+      return JsonResponseEntity.builder().error(false).statusCode(HttpStatus.INTERNAL_SERVER_ERROR)
+          .message("Error: " + e.getMessage()).build();
     }
   }
 
@@ -84,21 +84,23 @@ public class UserProfileService {
         return JsonResponseEntity.builder().status(false).statusCode(HttpStatus.NOT_FOUND)
             .message("Customer Not Found!").data(null).build();
       
-      String username = reqObj.getUsername() != null && !reqObj.getUsername().isEmpty() ? reqObj.getUsername().trim() : customer.getUsername();
+      String firstName = reqObj.getFirstName() != null && !reqObj.getFirstName().isEmpty() ? reqObj.getFirstName().trim() : customer.getFirstName();
+      
+      String lastName = reqObj.getLastName() != null && !reqObj.getLastName().isEmpty() ? reqObj.getLastName().trim() : customer.getLastName();
 
       String email = reqObj.getEmail() != null && !reqObj.getEmail().trim().isEmpty() ? reqObj.getEmail().trim() : customer.getEmail();
 
       String phone = reqObj.getPhone() != null && !reqObj.getPhone().isEmpty() ? reqObj.getPhone().trim() : customer.getPhone();
 
       // check why email is not trimed before save
-      repository.updateByQueryCustomer(username, email, phone, customerId);
+      repository.updateByQueryCustomer(firstName, lastName, email, phone, customerId);
       
       return JsonResponseEntity.builder().status(true).statusCode(HttpStatus.OK)
           .message("User with " + customerId + " updated successfully").data(null).build();
       
     } catch (Exception e) {
-      return JsonResponseEntity.builder().status(false).statusCode(HttpStatus.INTERNAL_SERVER_ERROR)
-          .message("Error: " + e.getMessage()).data(null).build();
+      return JsonResponseEntity.builder().error(false).statusCode(HttpStatus.INTERNAL_SERVER_ERROR)
+          .message("Error: " + e.getMessage()).build();
     }
   }
 }

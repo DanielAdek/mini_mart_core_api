@@ -1,17 +1,17 @@
 -- customers
-INSERT INTO customers (username, email, phone, passcode) VALUES ('John Wyclife', 'John@gmail.com', '+1950484888333', 'john.wyclife');
-INSERT INTO customers (username, email, phone, passcode) VALUES ('Marry Wyclife', 'marry@gmail.com', '+1950484888323', 'marry.wyclife');
-INSERT INTO customers (username, email, phone, passcode) VALUES ('John knox', 'knox@gmail.com', '+1950222388333', 'john.knox');
-INSERT INTO customers (username, email, phone, passcode) VALUES ('Billy Graham', 'billy@yahoo.com', '+1950484999003', 'billy.graham');
-INSERT INTO customers (username, email, phone, passcode) VALUES ('Wood McPhancy', 'wood@hotmail.com', '+1950484088333', 'wood.wyclife');
-INSERT INTO customers (username, email, phone, passcode) VALUES ('Alli Mabel', 'mabel@yahoo.com', '+1950484888339', 'password@1234');
-INSERT INTO customers (username, email, phone, passcode) VALUES ('Fred Jones', 'fred@gmail.com', '+1950484828333', 'password@1234');
-INSERT INTO customers (username, email, phone, passcode) VALUES ('Alexander Bright', 'alex@nownow.com', '+195041188333', 'password@1234');
-INSERT INTO customers (username, email, phone, passcode) VALUES ('Fred Anderson', 'fred@hotmail.com', '+1950484888335', 'password@1234');
-INSERT INTO customers (username, email, phone, passcode) VALUES ('Adek Abram', 'adekabram@gmail.com', '+1950484888332', 'password@1234');
-INSERT INTO customers (username, email, phone, passcode) VALUES ('Abraham Lincon', 'abraham@gmail.com', '+1950484888337', 'password@1234');
-INSERT INTO customers (username, email, phone, passcode) VALUES ('Washinton Dollars', 'dollars@britney.co.uk', '+1950484888653', 'password@1234');
-INSERT INTO customers (username, email, phone, passcode) VALUES ('Gorge Clinton', 'clinton@gmail.com', '+1950484888389', 'password@1234');
+INSERT INTO customers (username, email, phone, "password") VALUES ('John Wyclife', 'John@gmail.com', '+1950484888333', 'john.wyclife');
+INSERT INTO customers (username, email, phone, "password") VALUES ('Marry Wyclife', 'marry@gmail.com', '+1950484888323', 'marry.wyclife');
+INSERT INTO customers (username, email, phone, "password") VALUES ('John knox', 'knox@gmail.com', '+1950222388333', 'john.knox');
+INSERT INTO customers (username, email, phone, "password") VALUES ('Billy Graham', 'billy@yahoo.com', '+1950484999003', 'billy.graham');
+INSERT INTO customers (username, email, phone, "password") VALUES ('Wood McPhancy', 'wood@hotmail.com', '+1950484088333', 'wood.wyclife');
+INSERT INTO customers (username, email, phone, "password") VALUES ('Alli Mabel', 'mabel@yahoo.com', '+1950484888339', 'password@1234');
+INSERT INTO customers (username, email, phone, "password") VALUES ('Fred Jones', 'fred@gmail.com', '+1950484828333', 'password@1234');
+INSERT INTO customers (username, email, phone, "password") VALUES ('Alexander Bright', 'alex@nownow.com', '+195041188333', 'password@1234');
+INSERT INTO customers (username, email, phone, "password") VALUES ('Fred Anderson', 'fred@hotmail.com', '+1950484888335', 'password@1234');
+INSERT INTO customers (username, email, phone, "password") VALUES ('Adek Abram', 'adekabram@gmail.com', '+1950484888332', 'password@1234');
+INSERT INTO customers (username, email, phone, "password") VALUES ('Abraham Lincon', 'abraham@gmail.com', '+1950484888337', 'password@1234');
+INSERT INTO customers (username, email, phone, "password") VALUES ('Washinton Dollars', 'dollars@britney.co.uk', '+1950484888653', 'password@1234');
+INSERT INTO customers (username, email, phone, "password") VALUES ('Gorge Clinton', 'clinton@gmail.com', '+1950484888389', 'password@1234');
 
 -- products
 INSERT INTO products(customerId, productName, productCategory, productPrice) VALUES ('726f3ebe-e5be-4864-9da1-a5cce6666f4b', 'Blender', 'kitchen Equipment', 17000.00);

@@ -32,29 +32,32 @@ import jakarta.persistence.Column;
 @Table(name="customers")
 public class User implements UserDetails {
   @Id
-  @Column(name = "customerid")
+  @Column(name = "customer_id")
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID customerId;
 
-  @Column(name = "username")
-  private String username;
+  @Column(name = "first_name")
+  private String firstName;
+
+  @Column(name = "last_name")
+  private String lastName;
 
   private String email;
 
   private String phone;
 
-  private String passcode;
+  private String password;
 
   @Enumerated(EnumType.STRING)
-  @Column(name="role", columnDefinition = "varchar(20)")
+  @Column(name="role", columnDefinition = "varchar")
   private UserRole role;
 
   @CreationTimestamp
-  @Column(name = "createdat")
+  @Column(name = "created_at")
   private LocalDateTime createdAt;
 
   @UpdateTimestamp
-  @Column(name = "updatedat")
+  @Column(name = "updated_at")
   private LocalDateTime updatedAt;
 
   @Override
@@ -65,12 +68,12 @@ public class User implements UserDetails {
 
   @Override
   public String getUsername() {
-    return username;
+    return email;
   }
 
   @Override
   public String getPassword() {
-    return passcode;
+    return password;
   }
 
   @Override

@@ -19,23 +19,27 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
   @Modifying
   @Transactional
-  @Query(value = "DELETE FROM customers c WHERE c.customerid = ?1", nativeQuery = true)
-  void deleteByQueryCustomer(UUID cusomerId); 
+  @Query(value = "DELETE FROM customers c WHERE c.customer_id = ?1", nativeQuery = true)
+  void deleteByQueryCustomer(UUID cusomerId);
 
-  @Query(nativeQuery = true, value="SELECT * FROM customers c WHERE c.customerid = :customerId")
+  @Query(value = "SELECT * FROM customers c WHERE c.email = ?1", nativeQuery = true)
+  User findByEmailQueryCustomer(String email); 
+
+  @Query(nativeQuery = true, value="SELECT * FROM customers c WHERE c.customer_id = :customerId")
   User findByQueryCustomer(@Param("customerId") UUID customerId);
 
-  @Query(value="INSERT INTO customers (username, phone, email, passcode, role) VALUES (?1, ?2, ?3, ?4, ?5)", nativeQuery = true)
-  Optional<User>createCustomerByQuery(User user);
+  @Query(value="INSERT INTO customers (first_name, last_name, phone, email, password, role) VALUES (?1, ?2, ?3, ?4, ?5, ?6) returning *", nativeQuery = true)
+  User createCustomerByQuery(String first_name, String last_name, String phone, String email, String password, String role);
 
   @Modifying
   @Transactional
   @Query(
     nativeQuery = true,
-    value = "UPDATE customers SET username = :username, email = :email, phone = :phone WHERE customerid = :customerId"
+    value = "UPDATE customers SET first_name = :firstName, last_name = :lastName, email = :email, phone = :phone WHERE customer_id = :customerId"
   )
   void updateByQueryCustomer(
-    @Param("username") String username,
+    @Param("firstName") String firstName,
+    @Param("lastName") String lastName,
     @Param("email") String email,
     @Param("phone") String phone,
     @Param("customerId") UUID customerId

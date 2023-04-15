@@ -1,9 +1,6 @@
 package com.minimart.core.user;
 
-import java.util.Optional;
 import java.util.UUID;
-
-import javax.swing.text.html.Option;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

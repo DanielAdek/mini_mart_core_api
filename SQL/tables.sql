@@ -3,68 +3,69 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS products;
-DROP TABLE IF EXISTS productImages;
+DROP TABLE IF EXISTS product_images;
 DROP TABLE IF EXISTS orders;
 
-CREATE TABLE IF NOT EXISTS customers(
-  customerId UUID DEFAULT uuid_generate_v4(),
-  username VARCHAR(50) NOT NULL,
-  email CHAR(50) NOT NULL UNIQUE,
-  phone VARCHAR(15),
-  passcode CHAR(50),
-  createdAt TIMESTAMP DEFAULT NOW(),
-  updatedAt TIMESTAMP DEFAULT NOW(),
-  PRIMARY KEY(customerId),
+CREATE TABLE IF NOT EXISTS customers (
+  customer_id UUID DEFAULT uuid_generate_v4(),
+  first_name VARCHAR,
+  last_name VARCHAR,
+  email VARCHAR NOT NULL UNIQUE,
+  phone VARCHAR,
+  "password" VARCHAR(225),
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+  PRIMARY KEY(customer_id),
   UNIQUE(phone)
 );
 
-CREATE UNIQUE INDEX CONCURRENTLY customers_customerId ON customers(customerId);
+CREATE UNIQUE INDEX CONCURRENTLY customers_customer_id ON customers(customer_id);
 
 CREATE TABLE IF NOT EXISTS products(
-  productId UUID DEFAULT uuid_generate_v4(),
-  customerId UUID NOT NULL,
-  productName VARCHAR NOT NULL,
-  productCategory VARCHAR NOT NULL,
-  productPrice DECIMAL(18, 2) NOT NULL,
-  createdAt TIMESTAMP DEFAULT NOW(),
-  updatedAt TIMESTAMP DEFAULT NOW(),
-  PRIMARY KEY(productId),
+  product_id UUID DEFAULT uuid_generate_v4(),
+  customer_id UUID NOT NULL,
+  product_name VARCHAR NOT NULL,
+  product_category VARCHAR NOT NULL,
+  product_price DECIMAL(18, 2) NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+  PRIMARY KEY(product_id),
   CONSTRAINT fk_customer
-    FOREIGN KEY(customerId)
-      REFERENCES customers(customerId)
+    FOREIGN KEY(customer_id)
+      REFERENCES customers(customer_id)
       ON DELETE SET NULL -- if you want to keep the rest of the data
       -- ON DELETE CASCADE -- if you want to delete the entire row and loss the rest data
 );
 
-CREATE TABLE IF NOT EXISTS productImages(
-  productImageId UUID DEFAULT uuid_generate_v4(),
-  productId UUID NOT NULL,
-  customerId UUID NOT NULL,
-  productImage VARCHAR NOT NULL,
-  createdAt TIMESTAMP DEFAULT NOW(),
-  updatedAt TIMESTAMP DEFAULT NOW(),
-  PRIMARY KEY(productImageId),
+CREATE TABLE IF NOT EXISTS product_images (
+  product_image_id UUID DEFAULT uuid_generate_v4(),
+  product_id UUID NOT NULL,
+  customer_id UUID NOT NULL,
+  product_image VARCHAR NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+  PRIMARY KEY(product_image_id),
   CONSTRAINT fk_product
-    FOREIGN KEY(productId)
-      REFERENCES products(productId)
+    FOREIGN KEY(product_id)
+      REFERENCES products(product_id)
       ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS orders(
-  orderId UUID DEFAULT uuid_generate_v4(),
-  customerId UUID NOT NULL,
-  productId UUID NOT NULL,
-  deliveryAddr VARCHAR NULL,
-  deliveryContact VARCHAR NOT NULL,
-  deliveryNote VARCHAR NOT NULL,
-  createdAt TIMESTAMP DEFAULT NOW(),
-  updatedAt TIMESTAMP DEFAULT NOW(),
-  PRIMARY KEY(orderId),
+  order_id UUID DEFAULT uuid_generate_v4(),
+  customer_id UUID NOT NULL,
+  product_id UUID NOT NULL,
+  delivery_addr VARCHAR NULL,
+  delivery_contact VARCHAR NOT NULL,
+  delivery_note VARCHAR NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+  PRIMARY KEY(order_id),
   CONSTRAINT fk_multiple
-    FOREIGN KEY(customerId)
-      REFERENCES customers(customerId)
+    FOREIGN KEY(customer_id)
+      REFERENCES customers(customer_id)
       ON DELETE NO ACTION,
-    FOREIGN KEY(productId)
-      REFERENCES products(productId)
+    FOREIGN KEY(product_id)
+      REFERENCES products(product_id)
       ON DELETE NO ACTION
 );
